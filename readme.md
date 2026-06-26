@@ -5,8 +5,11 @@ It is work in progress. Time permitting I will keep adding features and stuff to
 
 # The Todo App's Todo List
 Ideally my aim is to have
+1. (auto) documentation (openapi)
+1. unit tests
 1. a front end
-2. a back-end API
-3. database
-4. scripts
+1. a back-end API
+1. database
+1. scripts
+1. devops automation
 
