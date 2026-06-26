@@ -13,3 +13,13 @@ Ideally my aim is to have
 1. scripts
 1. devops automation
 
+# Git branches
+
+## dev
+Working development branch
+
+## development/...
+All development work goes here
+
+... more branches to come ...
+
