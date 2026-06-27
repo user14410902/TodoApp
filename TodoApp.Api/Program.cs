@@ -1,5 +1,6 @@
 using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
 using Repository;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 builder.Services.AddFastEndpoints();
 builder.Services.AddDbContextFactory<TodoDbContext>(options =>
-options.UseInMemoryDatabase("TodoInMemoryDb"));
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("TodoConnectionString"));
+
+});
 
 var app = builder.Build();
 
@@ -20,7 +24,7 @@ app.StartSeed();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.MapOpenApi(); //e.g. http://localhost:5285/openapi/v1.json
 }
 
 app.UseHttpsRedirection();
