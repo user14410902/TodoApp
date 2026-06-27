@@ -7,7 +7,7 @@ It is work in progress. Time permitting I will keep adding features and stuff to
 Ideally my aim is to have
 1. (auto) documentation (openapi)
 1. unit tests
-1. a front end
+1. a front end (minimal but also fancy using a well know framework)
 1. a back-end API
 1. database
 1. scripts

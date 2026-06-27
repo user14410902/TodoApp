@@ -8,13 +8,13 @@ public static class DbInitializer
     {
       new Todo
       {
-        Id = 1,
-Name = "Todo1"
+        Id = Guid.NewGuid(),
+Name = "Todo1", Description = "Todo1 Description"
       },
 new Todo
 {
-  Id =2,
-Name = "Todo2"
+  Id = Guid.NewGuid(),
+Name = "Todo2", Description  = "Todo2 Description"
 }
     };
 
