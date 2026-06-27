@@ -20,7 +20,7 @@ app.StartSeed();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.MapOpenApi(); //e.g. http://localhost:5285/openapi/v1.json
 }
 
 app.UseHttpsRedirection();
