@@ -11,7 +11,7 @@ Ideally my aim is to have
 1. a back-end API
 1. database
 1. scripts
-1. devops automation test
+1. devops automation
 
 # Git branches
 
