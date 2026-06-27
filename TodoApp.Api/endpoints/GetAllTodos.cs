@@ -5,11 +5,12 @@ using Responses;
 
 namespace Endpoints;
 
-public class TodoEndpoint : EndpointWithoutRequest<List<TodoResponse>>
+
+public class GetAllTodos : EndpointWithoutRequest<List<TodoResponse>>
 {
   private readonly IDbContextFactory<TodoDbContext> _contextFactory;
 
-  public TodoEndpoint(IDbContextFactory<TodoDbContext> contextFactory)
+  public GetAllTodos(IDbContextFactory<TodoDbContext> contextFactory)
   {
     _contextFactory = contextFactory;
   }
@@ -24,7 +25,7 @@ public class TodoEndpoint : EndpointWithoutRequest<List<TodoResponse>>
   {
     using (var context = _contextFactory.CreateDbContext())
     {
-      await Send.OkAsync(context.Todos.Select(t => new TodoResponse { Name = t.Name }).ToList());
+      await Send.OkAsync(context.Todos.Select(t => new TodoResponse { Id = t.Id, Name = t.Name }).ToList());
     }
   }
 }
