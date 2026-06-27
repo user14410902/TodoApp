@@ -1,4 +1,6 @@
 using FastEndpoints;
+using Microsoft.EntityFrameworkCore;
+using Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,10 +8,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddFastEndpoints();
+builder.Services.AddDbContextFactory<TodoDbContext>(options =>
+options.UseInMemoryDatabase("TodoInMemoryDb"));
 
 var app = builder.Build();
 
 app.UseFastEndpoints();
+
+app.StartSeed();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

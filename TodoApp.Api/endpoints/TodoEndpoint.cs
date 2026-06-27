@@ -1,10 +1,19 @@
 using FastEndpoints;
+using Microsoft.EntityFrameworkCore;
+using Repository;
 using Responses;
 
 namespace Endpoints;
 
 public class TodoEndpoint : EndpointWithoutRequest<List<TodoResponse>>
 {
+  private readonly IDbContextFactory<TodoDbContext> _contextFactory;
+
+  public TodoEndpoint(IDbContextFactory<TodoDbContext> contextFactory)
+  {
+    _contextFactory = contextFactory;
+  }
+
   public override void Configure()
   {
     Get("/api/v1/todos");
@@ -13,15 +22,9 @@ public class TodoEndpoint : EndpointWithoutRequest<List<TodoResponse>>
 
   public override async Task HandleAsync(CancellationToken ct)
   {
-    var todos = new List<TodoResponse>
+    using (var context = _contextFactory.CreateDbContext())
     {
-      new TodoResponse {
-      Name = "Todo1"
-      }, new TodoResponse
-      {
-        Name = "Todo2"
-      }
-    };
-    await Send.OkAsync(todos);
+      await Send.OkAsync(context.Todos.Select(t => new TodoResponse { Name = t.Name }).ToList());
+    }
   }
 }
