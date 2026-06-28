@@ -17,6 +17,13 @@ public class CreateNewTodo_V1 : Endpoint<TodoRequest, TodoResponse>
   public override void Configure()
   {
     Post("/api/todos/create");
+    Description(b => b
+    .WithDisplayName("CreateNewTodo_V1")
+    .WithDescription("Create a new todo.")
+        .Accepts<TodoRequest>("application/json+custom")
+        .Produces<TodoResponse>(200, "application/json+custom")
+        .ProducesProblemFE(400) //shortcut for .Produces<ErrorResponse>(400)
+        .ProducesProblemFE<InternalErrorResponse>(500));
     AllowAnonymous();
     //Version(1).StartingRelease(1);
     Options(x => x.WithVersionSet(">>Todos<<").MapToApiVersion(1.0));
