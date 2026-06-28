@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Repository;
 using FastEndpoints.AspVersioning;
+using FastEndpoints.Security; //add this
+
 
 using Asp.Versioning;
 using Asp.Versioning.Conventions;
@@ -14,6 +16,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.AddAuthenticationJwtBearer(s => s.SigningKey = "The secret used to sign tokens. Which must be at least 256 bits. Even longer");
+builder.Services.AddAuthorization();
 builder.Services.AddFastEndpoints();
 builder.Services.AddProblemDetails();
 // builder.Services.AddApiVersioning(options=>
@@ -49,7 +53,8 @@ builder.Services.AddOpenApiDocument(options =>
 });
 
 var app = builder.Build();
-
+app.UseAuthentication(); //add this
+app.UseAuthorization();//add this
 app.UseFastEndpoints(options =>
 {
     options.Versioning.Prefix = "v";

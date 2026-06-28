@@ -15,6 +15,7 @@ Ideally my aim is to have
 1. add fluent validation
 
 ## Tidy Up Todos
+1. refactor API into 2 projects: API and UI
 1. fixing / tidy up versioning
 1. fix openapi / swagger confusion
 
@@ -37,6 +38,10 @@ All development work goes here
 **Swagger** http://localhost:5285/swagger/index.html#/Api
 
 ## API
+
+**Authentication related
+http://localhost:5285/api/v1/callmefirst
+curl -X POST --header "X-Api-Version: 1.0" http://localhost:5285/api/v1/callmefirst
 
 **Get all todos** http://localhost:5285/api/v1/todos
 curl -X GET http://localhost:5285/api/v1/todos
