@@ -1,24 +1,27 @@
-using FastEndpoints;
+using FastEndpoints.AspVersioning;
 using Microsoft.EntityFrameworkCore;
 using Repository;
 using Responses;
 
-namespace Endpoints;
+namespace Endpoints.v1;
 
 
-public class GetAllTodos : EndpointWithoutRequest<List<TodoResponse>>
+public class GetAllTodos_V1 : EndpointWithoutRequest<List<TodoResponse>>
 {
   private readonly IDbContextFactory<TodoDbContext> _contextFactory;
 
-  public GetAllTodos(IDbContextFactory<TodoDbContext> contextFactory)
+  public GetAllTodos_V1(IDbContextFactory<TodoDbContext> contextFactory)
   {
     _contextFactory = contextFactory;
   }
 
   public override void Configure()
   {
-    Get("/api/v1/todos");
+    Get("/api/todos");
     AllowAnonymous();
+    //Version(1).StartingRelease(1);
+    Options(x => x.WithVersionSet(">>Todos<<").MapToApiVersion(1.0));
+
   }
 
   public override async Task HandleAsync(CancellationToken ct)

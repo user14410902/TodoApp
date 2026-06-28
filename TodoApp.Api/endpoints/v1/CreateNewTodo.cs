@@ -1,23 +1,25 @@
-using FastEndpoints;
 using Responses;
 using Requests;
 using Microsoft.EntityFrameworkCore;
 using Repository;
+using FastEndpoints.AspVersioning;
 
-namespace Endpoints;
+namespace Endpoints.v1;
 
-public class CreateNewTodo : Endpoint<TodoRequest, TodoResponse>
+public class CreateNewTodo_V1 : Endpoint<TodoRequest, TodoResponse>
 {
   private readonly IDbContextFactory<TodoDbContext> _contextFactory;
 
-  public CreateNewTodo(IDbContextFactory<TodoDbContext> contextFactory)
+  public CreateNewTodo_V1(IDbContextFactory<TodoDbContext> contextFactory)
   {
     _contextFactory = contextFactory;
   }
   public override void Configure()
   {
-    Post("/api/v1/todos/create");
+    Post("/api/todos/create");
     AllowAnonymous();
+    //Version(1).StartingRelease(1);
+    Options(x => x.WithVersionSet(">>Todos<<").MapToApiVersion(1.0));
   }
 
   public override async Task HandleAsync(TodoRequest req, CancellationToken ct)
