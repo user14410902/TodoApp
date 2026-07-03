@@ -1,21 +1,34 @@
 using Microsoft.EntityFrameworkCore;
-using Repository;
 using FastEndpoints.AspVersioning;
-
 using Asp.Versioning;
 using Asp.Versioning.Conventions;
-using Asp.Versioning.ApiExplorer;
+using TodoApp.Repository;
+using TodoApp.Handlers.Exceptions;
 
+VersionSets.CreateApi(">>Diagnostics<<", v => v
+    .HasApiVersion(1.0));
 VersionSets.CreateApi(">>Todos<<", v => v
     .HasApiVersion(1.0));
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddFastEndpoints();
-builder.Services.AddProblemDetails();
+
+builder.Services.AddProblemDetails(options =>
+{
+    options.CustomizeProblemDetails = ctx =>
+    {
+        ctx.ProblemDetails.Extensions["traceId"] = ctx.HttpContext.TraceIdentifier;
+        ctx.ProblemDetails.Extensions["timestamp"] = DateTime.UtcNow;
+        ctx.ProblemDetails.Instance = $"{ctx.HttpContext.Request.Method} {ctx.HttpContext.Request.Path}";
+    };
+});
+// chain exception handlers
+builder.Services.AddExceptionHandler<NotFoundExceptionHandler>();
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+
 // builder.Services.AddApiVersioning(options=>
 // {
 //     options.Api
@@ -49,6 +62,10 @@ builder.Services.AddOpenApiDocument(options =>
 });
 
 var app = builder.Build();
+app.UseExceptionHandler(new ExceptionHandlerOptions
+{
+    SuppressDiagnosticsCallback = _ => false // Revert to .NET 8/9 behavior - always emit diagnostics
+});
 
 app.UseFastEndpoints(options =>
 {
@@ -67,7 +84,5 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.MapStaticAssets();
 app.UseFileServer();
-
-
 
 app.Run();

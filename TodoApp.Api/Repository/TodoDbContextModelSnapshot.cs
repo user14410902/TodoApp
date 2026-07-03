@@ -8,7 +8,7 @@ using Repository;
 
 #nullable disable
 
-namespace Repository
+namespace TodoApp.Repository
 {
     [DbContext(typeof(TodoDbContext))]
     partial class TodoDbContextModelSnapshot : ModelSnapshot

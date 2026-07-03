@@ -1,4 +1,4 @@
-namespace Repository;
+namespace TodoApp.Repository;
 
 public class Todo
 {

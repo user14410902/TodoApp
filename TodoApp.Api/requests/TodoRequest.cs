@@ -1,5 +1,6 @@
-namespace Requests;
+namespace TodoApp.Requests;
 
+//TODO Replace with record (as a learning exercise)
 public class TodoRequest
 {
   public required string Name { get; set; }
