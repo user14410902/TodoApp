@@ -1,9 +1,8 @@
 using FastEndpoints.AspVersioning;
 using Microsoft.EntityFrameworkCore;
-using Repository;
-using Responses;
-
-namespace Endpoints.v1;
+using TodoApp.Repository;
+using TodoApp.Responses;
+namespace TodoApp.Endpoints.v1.Todos;
 
 
 public class GetAllTodos_V1 : EndpointWithoutRequest<List<TodoResponse>>

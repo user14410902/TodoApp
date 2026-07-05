@@ -1,10 +1,10 @@
-using Responses;
-using Requests;
 using Microsoft.EntityFrameworkCore;
-using Repository;
 using FastEndpoints.AspVersioning;
+using TodoApp.Requests;
+using TodoApp.Responses;
+using TodoApp.Repository;
 
-namespace Endpoints.v1;
+namespace TodoApp.Endpoints.v1.Todos;
 
 public class CreateNewTodo_V1 : Endpoint<TodoRequest, TodoResponse>
 {

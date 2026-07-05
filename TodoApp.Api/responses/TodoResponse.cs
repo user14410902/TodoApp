@@ -1,4 +1,6 @@
-namespace Responses;
+namespace TodoApp.Responses;
+
+//TODO Replace with record (as a learning exercise)
 
 public class TodoResponse
 {
