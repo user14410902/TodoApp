@@ -2,12 +2,14 @@
 // https://www.youtube.com/watch?v=6BozpmSjk-Y&list=PLw5h0DiJ-9PBXb6SnjLxAQH6ecMYz3Wjs
 
 import AllTodos from "./views/AllTodos.js";
+import Login from "./views/Login.js";
 
 const router = async () => {
 
   console.log(`routing ${location.pathname}`);
 
   const routes = [
+    { path: "/login", view: Login },
     { path: "/", view: AllTodos }
   ];
 

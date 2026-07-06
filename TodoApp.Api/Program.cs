@@ -6,6 +6,7 @@ using Asp.Versioning;
 using Asp.Versioning.Conventions;
 using TodoApp.Repository;
 using TodoApp.Handlers.Exceptions;
+using Microsoft.AspNetCore.Rewrite;
 
 VersionSets.CreateApi(">>Diagnostics<<", v => v
     .HasApiVersion(1.0));
@@ -65,6 +66,11 @@ builder.Services.AddOpenApiDocument(options =>
     options.ApiVersion(new(1.0));
 });
 
+builder.Services.AddSpaStaticFiles(config =>
+{
+    config.RootPath = "wwwroot";
+});
+
 var app = builder.Build();
 
 app.UseAuthentication();
@@ -90,7 +96,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.MapStaticAssets();
 app.UseFileServer();
+app.UseSpa(config =>
+{
+    //   config.Options.DefaultPage = ""
+});
 
 app.Run();
