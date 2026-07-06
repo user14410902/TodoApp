@@ -19,14 +19,17 @@ const router = async () => {
     match = routes[0];
   }
 
+  const token = sessionStorage.getItem("token");
+  console.log(token);
 
-  if (match.requiresAuthorization && document.token === null) {
-    console.log('Not logging in. Going to login view.');
+  if (match.requiresAuthorization && token === null) {
+    console.log('Not logged in. Going to login view.');
     match = routes.find(r => r.path === '/login');
   }
   console.log(match);
 
-  const view = new match.view((html) => {
+  const view = new match.view();
+  await view.doPostConstructLoad((html) => {
     document.querySelector("#app").innerHTML = html;
   });
   //document.querySelector("#app").innerHTML = await view.getHtml();

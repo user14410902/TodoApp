@@ -1,8 +1,12 @@
 export default class AllTodos {
-  constructor(addToApp) {
+  constructor() {
     document.title = "All Todos";
 
-    const view = getHtml();
+
+  }
+
+  async doPostConstructLoad(addToApp) {
+    const view = await this.getHtml();
     addToApp(view);
   }
 
@@ -20,7 +24,7 @@ export default class AllTodos {
     // const token = jsonResponse.token;
     // console.log(jsonResponse);
 
-    const token = document.token;
+    const token = sessionStorage.getItem("token");
 
     const response = await fetch("api/todos", {
       method: "get",

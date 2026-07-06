@@ -1,27 +1,49 @@
 export default class Login {
-  constructor(addToApp) {
+  constructor() {
     document.title = "Todo App Login";
 
-    const view = this.getHtml();
+
+  }
+
+  async doPostConstructLoad(addToApp) {
+    const view = await this.getHtml();
     addToApp(view);
 
     const formId = "todoapp-form-login";
     this.formElement = document.getElementById(formId);
     console.log(this.formElement);
     // Attach the event listener programmatically and bind 'this'
-    this.formElement.addEventListener('submit', (e) => {
-      this.doLogin(e);
+    this.formElement.addEventListener('submit', async (e) => {
+      await this.doLogin(e);
       //event.preventDefault();
       //console.log('doing login');
     });
   }
 
-  doLogin(event) {
+  async doLogin(event) {
     event.preventDefault();
     console.log('doing login');
+
+
+    const authResponse = await fetch("/api/callmefirst", {
+      method: "post",
+      headers: {
+        "X-Api-Version": "1.0"
+      }
+    });
+    console.log(authResponse);
+    const jsonResponse = await authResponse.json();
+    const token = jsonResponse.token;
+    console.log(jsonResponse);
+
+    sessionStorage.setItem("token", token);
+
+    console.log(document.token);
+
+    window.location.replace("/")
   }
 
-  getHtml() {
+  async getHtml() {
 
     let html = `<h2>Login</h2>
    <form id="todoapp-form-login">
