@@ -1,11 +1,7 @@
 using FastEndpoints.AspVersioning;
 using FastEndpoints.Security;
-using Microsoft.EntityFrameworkCore;
-using Repository;
-using Responses;
 
-namespace Endpoints.v1;
-
+namespace TodoApp.Endpoints.v1.Todos;
 
 public class CallMeFirst_V1 : EndpointWithoutRequest
 {
@@ -14,7 +10,6 @@ public class CallMeFirst_V1 : EndpointWithoutRequest
   {
     Post("/api/callmefirst");
     AllowAnonymous();
-    //Version(1).StartingRelease(1);
     Options(x => x.WithVersionSet(">>Todos<<").MapToApiVersion(1.0));
 
   }
