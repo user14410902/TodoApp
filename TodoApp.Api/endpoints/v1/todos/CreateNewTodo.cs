@@ -44,11 +44,7 @@ public class CreateNewTodo_V1 : Endpoint<TodoRequest, TodoResponse>
       context.Todos.Add(newTodo);
       await context.SaveChangesAsync(ct);
 
-      await Send.OkAsync(new TodoResponse
-      {
-        Id = newTodo.Id,
-        Name = req.Name
-      });
+      await Send.OkAsync(new TodoResponse(newTodo.Id, req.Name));
 
     }
   }
