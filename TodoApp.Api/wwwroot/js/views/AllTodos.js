@@ -5,7 +5,7 @@ export default class AllTodos {
 
   async getHtml() {
 
-    const response = await fetch("api/v1/todos");
+    const response = await fetch("api/todos");
     const result = await response.json();
 
     let html = `<h2>All Todos</h2>
