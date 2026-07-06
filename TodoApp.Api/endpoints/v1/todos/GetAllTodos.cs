@@ -1,9 +1,8 @@
 using FastEndpoints.AspVersioning;
 using Microsoft.EntityFrameworkCore;
-using Repository;
-using Responses;
-
-namespace Endpoints.v1;
+using TodoApp.Repository;
+using TodoApp.Responses;
+namespace TodoApp.Endpoints.v1.Todos;
 
 
 public class GetAllTodos_V1 : EndpointWithoutRequest<List<TodoResponse>>
@@ -28,7 +27,7 @@ public class GetAllTodos_V1 : EndpointWithoutRequest<List<TodoResponse>>
   {
     using (var context = _contextFactory.CreateDbContext())
     {
-      await Send.OkAsync(context.Todos.Select(t => new TodoResponse { Id = t.Id, Name = t.Name }).ToList());
+      await Send.OkAsync(context.Todos.Select(t => new TodoResponse(t.Id, t.Name)).ToList());
     }
   }
 }

@@ -1,10 +1,3 @@
-namespace Requests;
+namespace TodoApp.Requests;
 
-public class TodoRequest
-{
-  public required string Name { get; set; }
-  public required string Description { get; set; }
-  public bool Completed { get; set; }
-  public required DateTime DueBy { get; set; }
-
-}
+public record TodoRequest(string Name, string Description, bool Completed, DateTime DueBy);

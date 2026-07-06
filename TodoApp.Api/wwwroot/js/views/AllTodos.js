@@ -25,6 +25,7 @@ export default class AllTodos {
         "Content-Type": 'application/json'
       }
     });
+
     const result = await response.json();
 
     let html = `<h2>All Todos</h2>

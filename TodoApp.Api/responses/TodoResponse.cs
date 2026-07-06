@@ -1,7 +1,3 @@
-namespace Responses;
+namespace TodoApp.Responses;
 
-public class TodoResponse
-{
-  public Guid Id { get; set; }
-  public required string Name { get; set; }
-}
+public record TodoResponse(Guid Id, string Name);

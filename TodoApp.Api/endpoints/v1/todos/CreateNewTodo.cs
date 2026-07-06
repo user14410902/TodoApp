@@ -1,10 +1,10 @@
-using Responses;
-using Requests;
 using Microsoft.EntityFrameworkCore;
-using Repository;
 using FastEndpoints.AspVersioning;
+using TodoApp.Requests;
+using TodoApp.Responses;
+using TodoApp.Repository;
 
-namespace Endpoints.v1;
+namespace TodoApp.Endpoints.v1.Todos;
 
 public class CreateNewTodo_V1 : Endpoint<TodoRequest, TodoResponse>
 {
@@ -44,11 +44,7 @@ public class CreateNewTodo_V1 : Endpoint<TodoRequest, TodoResponse>
       context.Todos.Add(newTodo);
       await context.SaveChangesAsync(ct);
 
-      await Send.OkAsync(new TodoResponse
-      {
-        Id = newTodo.Id,
-        Name = req.Name
-      });
+      await Send.OkAsync(new TodoResponse(newTodo.Id, req.Name));
 
     }
   }

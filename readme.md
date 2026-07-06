@@ -39,6 +39,8 @@ All development work goes here
 
 ## API
 
+Use Swagger! http://localhost:5285/swagger/index.html#/
+
 **Authentication related
 http://localhost:5285/api/v1/callmefirst
 curl -X POST --header "X-Api-Version: 1.0" http://localhost:5285/api/v1/callmefirst
@@ -46,5 +48,20 @@ curl -X POST --header "X-Api-Version: 1.0" http://localhost:5285/api/v1/callmefi
 **Get all todos** http://localhost:5285/api/v1/todos
 curl -X GET http://localhost:5285/api/v1/todos
 
-**Create a todo** http://localhost:5285/api/v1/todos/create
-curl -X POST --json '{"name":"New Todo","description":"Description of new todo", "completed":false, "created":"2026-06-27", "dueBy":"2026-07-01"}' http://localhost:5285/api/v1/todos/create
+### Diagnostics
+#### Test Exception Handling
+curl --header "X-Api-Version: 1.0" -X GET http://localhost:5285/api/diagnostics/exception --verbose
+
+#### Test NotFoundException Handling
+curl --header "X-Api-Version: 1.0" -X GET http://localhost:5285/api/diagnostics/notfoundexception --verbose
+
+
+#### Badrequest
+curl --header "X-Api-Version: 1.0" -X GET http://localhost:5285/api/diagnostics/badrequest --verbose
+
+## Todos
+### Get all todos** http://localhost:5285/api/todos
+curl --header "X-Api-Version: 1.0" -X GET http://localhost:5285/api/todos --verbose
+
+### Create a todo** http://localhost:5285/api/todos/create
+curl -X POST --json '{"name":"New Todo","description":"Description of new todo", "completed":false, "created":"2026-06-27", "dueBy":"2026-07-01"}' http://localhost:5285/api/todos/create
