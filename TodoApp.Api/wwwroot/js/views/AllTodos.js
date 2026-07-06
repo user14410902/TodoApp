@@ -1,6 +1,9 @@
 export default class AllTodos {
-  constructor() {
+  constructor(addToApp) {
     document.title = "All Todos";
+
+    const view = getHtml();
+    addToApp(view);
   }
 
   async getHtml() {

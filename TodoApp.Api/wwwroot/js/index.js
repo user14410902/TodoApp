@@ -26,8 +26,10 @@ const router = async () => {
   }
   console.log(match);
 
-  const view = new match.view();
-  document.querySelector("#app").innerHTML = await view.getHtml();
+  const view = new match.view((html) => {
+    document.querySelector("#app").innerHTML = html;
+  });
+  //document.querySelector("#app").innerHTML = await view.getHtml();
 
 }
 

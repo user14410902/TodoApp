@@ -1,12 +1,30 @@
 export default class Login {
-  constructor() {
+  constructor(addToApp) {
     document.title = "Todo App Login";
+
+    const view = this.getHtml();
+    addToApp(view);
+
+    const formId = "todoapp-form-login";
+    this.formElement = document.getElementById(formId);
+    console.log(this.formElement);
+    // Attach the event listener programmatically and bind 'this'
+    this.formElement.addEventListener('submit', (e) => {
+      this.doLogin(e);
+      //event.preventDefault();
+      //console.log('doing login');
+    });
   }
 
-  async getHtml() {
+  doLogin(event) {
+    event.preventDefault();
+    console.log('doing login');
+  }
+
+  getHtml() {
 
     let html = `<h2>Login</h2>
-   <form>
+   <form id="todoapp-form-login">
   <label for="username">Username</label>
   <input type="text" id="username" name="username" required />
 
