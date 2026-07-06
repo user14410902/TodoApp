@@ -7,6 +7,7 @@ using Asp.Versioning.Conventions;
 using TodoApp.Repository;
 using TodoApp.Handlers.Exceptions;
 using Microsoft.AspNetCore.Rewrite;
+using Microsoft.OpenApi;
 
 VersionSets.CreateApi(">>Diagnostics<<", v => v
     .HasApiVersion(1.0));
@@ -41,7 +42,7 @@ builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddVersioning(options =>
 {
     options.DefaultApiVersion = new(1.0);
-    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.AssumeDefaultVersionWhenUnspecified = false;
     options.ApiVersionReader = new HeaderApiVersionReader("X-Api-Version");
 });
 builder.Services.AddEndpointsApiExplorer();
@@ -53,6 +54,7 @@ builder.Services.SwaggerDocument(options =>
         x.ApiVersion(new(1.0));
     };
     options.AutoTagPathSegmentIndex = 0;
+    options.EnableJWTBearerAuth = true; //TODO Fix swagger authorization header. Currently missing.
 });
 builder.Services.AddDbContextFactory<TodoDbContext>(options =>
 {
@@ -99,6 +101,7 @@ app.UseHttpsRedirection();
 
 app.MapStaticAssets();
 app.UseFileServer();
+app.UseSpaStaticFiles();
 app.UseSpa(config =>
 {
     //   config.Options.DefaultPage = ""

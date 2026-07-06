@@ -17,8 +17,6 @@ public class GetAllTodos_V1 : EndpointWithoutRequest<List<TodoResponse>>
   public override void Configure()
   {
     Get("/api/todos");
-    //AllowAnonymous();
-    //Version(1).StartingRelease(1);
     Options(x => x.WithVersionSet(">>Todos<<").MapToApiVersion(1.0));
 
   }

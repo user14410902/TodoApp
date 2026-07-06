@@ -5,17 +5,19 @@ export default class AllTodos {
 
   async getHtml() {
 
-    const authResponse = await fetch("/api/callmefirst", {
-      method: "post",
-      headers: {
-        "X-Api-Version": "1.0"
-      }
-    });
-    console.log(authResponse);
-    const jsonResponse = await authResponse.json();
-    const token = jsonResponse.token;
-    console.log(jsonResponse);
 
+    // const authResponse = await fetch("/api/callmefirst", {
+    //   method: "post",
+    //   headers: {
+    //     "X-Api-Version": "1.0"
+    //   }
+    // });
+    // console.log(authResponse);
+    // const jsonResponse = await authResponse.json();
+    // const token = jsonResponse.token;
+    // console.log(jsonResponse);
+
+    const token = document.token;
 
     const response = await fetch("api/todos", {
       method: "get",

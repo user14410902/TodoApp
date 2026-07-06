@@ -42,11 +42,12 @@ All development work goes here
 Use Swagger! http://localhost:5285/swagger/index.html#/
 
 **Authentication related
-http://localhost:5285/api/v1/callmefirst
-curl -X POST --header "X-Api-Version: 1.0" http://localhost:5285/api/v1/callmefirst
+http://localhost:5285/api/callmefirst
+curl -X POST --header "X-Api-Version: 1.0" http://localhost:5285/api/callmefirst
 
-**Get all todos** http://localhost:5285/api/v1/todos
-curl -X GET http://localhost:5285/api/v1/todos
+**Get all todos** http://localhost:5285/api/todos
+
+curl -X GET --header "X-Api-Version: 1.0" --header "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODM0Mzc1MDQsImlhdCI6MTc4MzM1MTEwNCwiVXNlck5hbWUiOiJVc2VybmFtZSIsIlVzZXJJZCI6IjAwMSIsInJvbGUiOlsiTWFuYWdlciIsIkF1ZGl0b3IiXSwibmJmIjoxNzgzMzUxMTA0fQ.URW36rsY0dZ2HIvqpwwy-8rsdgA-gqShT9Pt7S7Tfiw" http://localhost:5285/api/todos
 
 ### Diagnostics
 #### Test Exception Handling

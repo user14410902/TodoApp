@@ -9,20 +9,26 @@ const router = async () => {
   console.log(`routing ${location.pathname}`);
 
   const routes = [
-    { path: "/login", view: Login },
-    { path: "/", view: AllTodos }
+    { path: "/login", view: Login, requiresAuthorization: false },
+    { path: "/", view: AllTodos, requiresAuthorization: true }
   ];
 
-  const match = routes.find(r => r.path === location.pathname);
+  let match = routes.find(r => r.path === location.pathname);
 
   if (match === null) {
     match = routes[0];
   }
 
+
+  if (match.requiresAuthorization && document.token === null) {
+    console.log('Not logging in. Going to login view.');
+    match = routes.find(r => r.path === '/login');
+  }
   console.log(match);
 
   const view = new match.view();
   document.querySelector("#app").innerHTML = await view.getHtml();
+
 }
 
 window.addEventListener("popstate", router);//call return when going back in history
@@ -35,6 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
       navigateTo(e.target.href);
     }
   });
+
+  document.token = null;
 
   router();
 });
