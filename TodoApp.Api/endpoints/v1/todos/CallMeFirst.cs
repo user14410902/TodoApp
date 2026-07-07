@@ -1,9 +1,11 @@
 using FastEndpoints.AspVersioning;
 using FastEndpoints.Security;
+using TodoApp.Requests;
+using TodoApp.Responses;
 
 namespace TodoApp.Endpoints.v1.Todos;
 
-public class CallMeFirst_V1 : EndpointWithoutRequest
+public class CallMeFirst_V1 : Endpoint<LoginRequest, LoginResponse>
 {
 
   public override void Configure()
@@ -14,9 +16,9 @@ public class CallMeFirst_V1 : EndpointWithoutRequest
 
   }
 
-  public override async Task HandleAsync(CancellationToken ct)
+  public override async Task HandleAsync(LoginRequest req, CancellationToken ct)
   {
-    if (CheckCredentials())
+    if (CheckCredentials(req.username, req.password))
     {
       var jwtToken = JwtBearer.CreateToken(
           o =>
@@ -28,18 +30,13 @@ public class CallMeFirst_V1 : EndpointWithoutRequest
             o.User["UserId"] = "001"; //indexer based claim setting
           });
 
-      await Send.OkAsync(
-          new
-          {
-            Username = "Username",
-            Token = jwtToken
-          });
+      await Send.OkAsync(new LoginResponse(jwtToken));
     }
     else
       ThrowError("The supplied credentials are invalid!");
   }
 
-  private bool CheckCredentials()
+  private bool CheckCredentials(string username, string password)
   {
     //TODO Implement CheckCredentials
     return true;

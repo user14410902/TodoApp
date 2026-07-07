@@ -24,12 +24,17 @@ export default class Login {
     event.preventDefault();
     console.log('doing login');
 
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
 
     const authResponse = await fetch("/api/callmefirst", {
       method: "post",
       headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
         "X-Api-Version": "1.0"
-      }
+      },
+      body: JSON.stringify({ username, password })
     });
     console.log(authResponse);
     const jsonResponse = await authResponse.json();
