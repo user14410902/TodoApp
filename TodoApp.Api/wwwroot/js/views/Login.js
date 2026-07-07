@@ -27,7 +27,7 @@ export default class Login {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
-    const authResponse = await fetch("/api/callmefirst", {
+    const authResponse = await fetch("/api/login", {
       method: "post",
       headers: {
         "Accept": "application/json",

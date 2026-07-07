@@ -5,12 +5,12 @@ using TodoApp.Responses;
 
 namespace TodoApp.Endpoints.v1.Todos;
 
-public class CallMeFirst_V1 : Endpoint<LoginRequest, LoginResponse>
+public class Login_V1 : Endpoint<LoginRequest, LoginResponse>
 {
 
   public override void Configure()
   {
-    Post("/api/callmefirst");
+    Post("/api/login");
     AllowAnonymous();
     Options(x => x.WithVersionSet(">>Todos<<").MapToApiVersion(1.0));
 

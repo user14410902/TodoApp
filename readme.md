@@ -33,36 +33,46 @@ All development work goes here
 
 (Replace localhost:5285 with the correct server and port.)
 
-**Web UI** http://localhost:5285/
-**OpenApi** http://localhost:5285/openapi/v1.json
-**Swagger** http://localhost:5285/swagger/index.html#/Api
+**Web UI** `http://localhost:5285/`
+**OpenApi** `http://localhost:5285/openapi/v1.json`
+**Swagger** `http://localhost:5285/swagger/index.html#/Api`
 
 ## API
 
-Use Swagger! http://localhost:5285/swagger/index.html#/
+Use Swagger! `http://localhost:5285/swagger/index.html#/`
 
-**Authentication related
-http://localhost:5285/api/callmefirst
-curl -X POST --header "X-Api-Version: 1.0" http://localhost:5285/api/callmefirst
+**Authentication related**
 
-**Get all todos** http://localhost:5285/api/todos
+`http://localhost:5285/api/login`
 
-curl -X GET --header "X-Api-Version: 1.0" --header "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODM0Mzc1MDQsImlhdCI6MTc4MzM1MTEwNCwiVXNlck5hbWUiOiJVc2VybmFtZSIsIlVzZXJJZCI6IjAwMSIsInJvbGUiOlsiTWFuYWdlciIsIkF1ZGl0b3IiXSwibmJmIjoxNzgzMzUxMTA0fQ.URW36rsY0dZ2HIvqpwwy-8rsdgA-gqShT9Pt7S7Tfiw" http://localhost:5285/api/todos
+`curl -X POST --header "X-Api-Version: 1.0" --header "Accept: application/json" --header "Content-Type: application/json" --data '{"username":"xyz","password":"xyz"}' http://localhost:5285/api/login`
+
+**Get all todos**
+
+`http://localhost:5285/api/todos`
+
+`curl -X GET --header "X-Api-Version: 1.0" --header "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODM0Mzc1MDQsImlhdCI6MTc4MzM1MTEwNCwiVXNlck5hbWUiOiJVc2VybmFtZSIsIlVzZXJJZCI6IjAwMSIsInJvbGUiOlsiTWFuYWdlciIsIkF1ZGl0b3IiXSwibmJmIjoxNzgzMzUxMTA0fQ.URW36rsY0dZ2HIvqpwwy-8rsdgA-gqShT9Pt7S7Tfiw" http://localhost:5285/api/todos`
 
 ### Diagnostics
 #### Test Exception Handling
-curl --header "X-Api-Version: 1.0" -X GET http://localhost:5285/api/diagnostics/exception --verbose
+`curl --header "X-Api-Version: 1.0" -X GET http://localhost:5285/api/diagnostics/exception --verbose`
 
 #### Test NotFoundException Handling
-curl --header "X-Api-Version: 1.0" -X GET http://localhost:5285/api/diagnostics/notfoundexception --verbose
+`curl --header "X-Api-Version: 1.0" -X GET http://localhost:5285/api/diagnostics/notfoundexception --verbose`
 
 
 #### Badrequest
-curl --header "X-Api-Version: 1.0" -X GET http://localhost:5285/api/diagnostics/badrequest --verbose
+`curl --header "X-Api-Version: 1.0" -X GET http://localhost:5285/api/diagnostics/badrequest --verbose`
 
 ## Todos
-### Get all todos** http://localhost:5285/api/todos
-curl --header "X-Api-Version: 1.0" -X GET http://localhost:5285/api/todos --verbose
+### Get all todos
 
-### Create a todo** http://localhost:5285/api/todos/create
-curl -X POST --json '{"name":"New Todo","description":"Description of new todo", "completed":false, "created":"2026-06-27", "dueBy":"2026-07-01"}' http://localhost:5285/api/todos/create
+`http://localhost:5285/api/todos`
+
+`curl --header "X-Api-Version: 1.0" -X GET http://localhost:5285/api/todos --verbose`
+
+### Create a todo
+
+`http://localhost:5285/api/todos/create`
+
+`curl -X POST --json '{"name":"New Todo","description":"Description of new todo", "completed":false, "created":"2026-06-27", "dueBy":"2026-07-01"}' http://localhost:5285/api/todos/create`
